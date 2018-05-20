@@ -1,7 +1,5 @@
 package ru.smartdeveloper.politech;
 
-import java.util.Stack;
-
 public class AVLTree<T extends Comparable<T>> extends AbstractTree<T>
 {
     public void add(T data){
@@ -147,39 +145,4 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T>
             System.out.println(root.data);
         }
     }
-
-
-    public void displayTree(){
-        Stack globalStack = new Stack();
-        globalStack.push(root);
-        int nBlanks = 32;
-        boolean isRowEmpty = false;
-        while(isRowEmpty == false){
-            Stack localStack = new Stack();
-            isRowEmpty = true;
-            for(int j = 0; j < nBlanks; j++)
-                System.out.print(' ');
-            while(globalStack.isEmpty() == false){
-                AVLTree.Node temp = (AVLTree.Node)globalStack.pop();
-                if(temp != null){
-                    System.out.print(temp.data);
-                    localStack.push(temp.left);
-                    localStack.push(temp.right);
-                    if(temp.left != null || temp.right != null)
-                        isRowEmpty = false;
-                }else{
-                    System.out.print("--");
-                    localStack.push(null);
-                    localStack.push(null);
-                }
-                for(int j = 0; j < nBlanks * 2 - 2; j++)
-                    System.out.print(' ');
-            }
-            System.out.println();
-            nBlanks /= 2;
-            while (localStack.isEmpty() == false)
-                globalStack.push(localStack.pop());
-        }
-    }
-
 }

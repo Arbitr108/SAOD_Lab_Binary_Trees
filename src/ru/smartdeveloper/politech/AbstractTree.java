@@ -19,6 +19,21 @@ abstract class AbstractTree<T extends Comparable<T>> {
         }
     }
 
+    public T find(T data) {
+        Node<T> current = root;
+        while(current.data.compareTo(data) != 0){
+            if(data.compareTo(current.data) < 0){
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+            if(current == null){
+                return null;
+            }
+        }
+        return current.data;
+    }
+
     public int size(){
         return current_size;
     }
