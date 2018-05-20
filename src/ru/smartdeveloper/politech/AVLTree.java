@@ -31,7 +31,7 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T>
             }else{
                 add(parent.left, node);
             }
-        }else{
+        }else if(node.data.compareTo(parent.data) == 0){
             return;
         }
         checkBalance(node);
@@ -39,12 +39,10 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T>
 
     private void checkBalance(Node<T> node){
         int difference = height(node.left) - height(node.right);
-        System.out.println("Entering with   " + node.data + " difference " + difference);
         if( difference > 1 || difference < -1){
             rebalance(node);
         }
         if(node.parent == null){
-            System.out.println(" Exiting with  " + node.data);
             return;
         }
         checkBalance(node.parent);
@@ -62,7 +60,6 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T>
 
     private void rebalance(Node<T> node){
         int difference = height(node.left) - height(node.right);
-        System.out.println("Rebalancing of node of " + node.data + " difference " + difference );
         if(difference > 1){
             if(height(node.left.left) > height(node.left.right)){
                 node = rightRotate(node);
@@ -82,32 +79,16 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T>
     }
 
     private Node<T> leftRotate(Node<T> node){
-        System.out.println();
-        System.out.println();
-        logRotation("Left rotation start", node);
         Node<T> tmp = node.right;
         node.right = tmp.left;
         tmp.left = node;
-        tmp.parent = node.parent;
-        node.parent = tmp;
-        logRotation("Left rotation finish", node);
-        System.out.println();
-        System.out.println();
         return tmp;
     }
 
     private Node<T> rightRotate(Node<T> node){
-        System.out.println();
-        System.out.println();
-        logRotation("Right rotation start", node);
         Node<T> tmp = node.left;
         node.left = tmp.right;
         tmp.right = node;
-        tmp.parent = node.parent;
-        node.parent = tmp;
-        logRotation("Right rotate finish", node);
-        System.out.println();
-        System.out.println();
         return tmp;
     }
 
@@ -123,12 +104,10 @@ public class AVLTree<T extends Comparable<T>> extends AbstractTree<T>
     }
 
     private Node<T> rightLeftRotate(Node<T> node){
-        System.out.println("Right Left Rotate");
         node.right = rightRotate(node.right);
         return leftRotate(node);
     }
     private Node<T> leftRightRotate(Node<T> node){
-        System.out.println("Left Right Rotate");
         node.left = leftRotate(node.left);
         return rightRotate(node);
     }

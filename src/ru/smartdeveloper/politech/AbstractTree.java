@@ -6,6 +6,11 @@ abstract class AbstractTree<T extends Comparable<T>> {
     protected Node<T> root;
     protected int current_size;
 
+    public AbstractTree(){
+        root = null;
+        current_size = 0;
+    }
+
     public abstract void add(T data);
 
     void hydrate(ArrayList<T> elements) {

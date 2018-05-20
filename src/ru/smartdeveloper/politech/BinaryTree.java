@@ -4,11 +4,6 @@ import java.util.Stack;
 
 public class BinaryTree<T extends Comparable<T>> extends AbstractTree<T>{
 
-    BinaryTree() {
-        root = null;
-        current_size = 0;
-    }
-
     public T find(T data) {
         Node<T> current = root;
         while(current.data != data){
